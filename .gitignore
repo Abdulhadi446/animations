@@ -1,3 +1,9 @@
 /Day 1/media
 /Day 1/__pycache__
 /Day 1/.vscode
+# Ignore node_modules and build output
+**/__pycache__/
+**/.qodo/
+**/.vscode/
+**/media/
+.gitigore

@@ -1,5 +1,0 @@
-# Ignore node_modules and build output
-**/__pycache__/
-**/.qodo/
-**/.vscode/
-**/media/
