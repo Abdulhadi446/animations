@@ -16,7 +16,7 @@ class UprightRGBPipeSort(Scene):
         base_num_pipes = 10
         base_max_height = 5
         base_pipe_width = 0.4
-        base_sort_speed = 1  # slowest animation time
+        base_sort_speed = 0.03  # slowest animation time 0.026 for exact
 
         num_pipes = int(base_num_pipes * anim_speed)
         max_height = base_max_height
@@ -44,7 +44,7 @@ class UprightRGBPipeSort(Scene):
         self.play(*[FadeIn(p) for p in pipes], run_time=0.5)
         self.wait(0.5)
 
-        # Bubble Sort animation
+        # Bubble Sort animation with sound
         for i in range(num_pipes):
             for j in range(num_pipes - i - 1):
                 if pipes[j].height > pipes[j + 1].height:
@@ -53,9 +53,13 @@ class UprightRGBPipeSort(Scene):
                         pipes[j + 1].animate.shift((pipe_width + 0.05) * LEFT),
                         run_time=sort_speed
                     )
+                    self.add_sound("sort.wav")  # Play sound on each swap
                     pipes[j], pipes[j + 1] = pipes[j + 1], pipes[j]
 
         self.wait(1)
+
+# Render with: python -m manim -pql app.py
+
         # Finalize the scene
 if __name__ == "__main__":
     import os
