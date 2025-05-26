@@ -16,7 +16,7 @@ class UprightRGBPipeSort(Scene):
         base_num_pipes = 10
         base_max_height = 5
         base_pipe_width = 0.4
-        base_sort_speed = 0.4  # slowest animation time
+        base_sort_speed = 1  # slowest animation time
 
         num_pipes = int(base_num_pipes * anim_speed)
         max_height = base_max_height
