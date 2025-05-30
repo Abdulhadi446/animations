@@ -26,7 +26,7 @@ class DroppingBallsWithSound(Scene):
                 self.circle = Circle(radius=ball_radius, color=color, fill_opacity=1).set_fill(color)
                 self.circle.move_to(position)
                 self.velocity = np.array([random.uniform(-1.0, 1.0), 0.0, 0.0])
-                self.sound_cooldown = 0  # Cooldown timer for sound
+                self.sound_cooldown = 0 ,  Cooldown timer for sound
                 balls.append(self)
 
         def no_overlap_position():
@@ -62,26 +62,26 @@ class DroppingBallsWithSound(Scene):
 
                 played_sound = False
 
-                # Floor bounce
+            ,  Floor bounce
                 if new_pos[1] - ball_radius <= floor_y:
                     new_pos[1] = floor_y + ball_radius
                     ball.velocity[1] *= -elasticity
                     ball.velocity[0] += random.uniform(-0.5, 0.5)
                     played_sound = True
 
-                # Ceiling bounce
+            ,  Ceiling bounce
                 if new_pos[1] + ball_radius >= ceiling_y:
                     new_pos[1] = ceiling_y - ball_radius
                     ball.velocity[1] *= -elasticity
                     played_sound = True
 
-                # Left wall
+            ,  Left wall
                 if new_pos[0] - ball_radius <= left_x:
                     new_pos[0] = left_x + ball_radius
                     ball.velocity[0] *= -elasticity
                     played_sound = True
 
-                # Right wall
+            ,  Right wall
                 if new_pos[0] + ball_radius >= right_x:
                     new_pos[0] = right_x - ball_radius
                     ball.velocity[0] *= -elasticity
@@ -91,11 +91,11 @@ class DroppingBallsWithSound(Scene):
 
                 if played_sound and ball.sound_cooldown <= 0:
                     self.add_sound("bounce.wav")
-                    ball.sound_cooldown = 0.1  # Cooldown in seconds
+                    ball.sound_cooldown = 0.1 ,  Cooldown in seconds
 
                 ball.sound_cooldown = max(0, ball.sound_cooldown - dt)
 
-            # Ball-to-ball collisions
+        ,  Ball-to-ball collisions
             for i in range(len(balls)):
                 for j in range(i + 1, len(balls)):
                     b1 = balls[i]
@@ -116,9 +116,10 @@ class DroppingBallsWithSound(Scene):
                         b2.velocity += (v1n - v2n) * direction
 
         balls_group.add_updater(update_balls)
-        self.wait(60)
+        self.wait(59)
         balls_group.remove_updater(update_balls)
 
 if __name__ == "__main__":
     import os
     os.system("manim -pql app.py DroppingBallsWithSound")
+, , Manim, ManimAnimation, PythonAnimation, PhysicsSimulation, BouncingBalls, BallPhysics, CodingAnimation, Programming, MathAnimation, OpenSource, LearnToCode, PhysicsInPython, SoundEffects, CreativeCoding, ComputerGraphics, GameDev, VisualEffects, Simulation, Shorts
