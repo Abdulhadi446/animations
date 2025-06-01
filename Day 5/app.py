@@ -26,7 +26,7 @@ class RollerCoasterSmooth(MovingCameraScene):
         base_wave -= np.mean(base_wave)
         base_wave *= scale_factor
 
-        noise_amplitude = 0.05
+        noise_amplitude = 0.01
         raw_noise = noise_amplitude * (np.random.rand(num_points) - 0.5)
 
         def smooth_noise(noise, window_size=11):
@@ -108,12 +108,29 @@ class RollerCoasterSmooth(MovingCameraScene):
             mob.current_angle = angle
 
         # ───────────────────────────────
-        # Play Sound on Loop (Repeated)
+        # Play Sound on Loop (Auto-detected duration)
         # ───────────────────────────────
         sound_file = "cavesound.wav"
-        sound_duration = 10  # seconds (adjust to real length of your sound)
         total_runtime = 59
-
+        
+        # Automatically detect audio duration using wave module
+        import wave
+        import contextlib
+        
+        def get_audio_duration(file_path):
+            with contextlib.closing(wave.open(file_path, 'r')) as f:
+                frames = f.getnframes()
+                rate = f.getframerate()
+                duration = frames / float(rate)
+                return duration
+        
+        try:
+            sound_duration = get_audio_duration(sound_file)
+            print(f"Detected audio duration: {sound_duration} seconds")
+        except Exception as e:
+            print(f"Error detecting audio duration: {e}")
+            sound_duration = 10  # Fallback to default if detection fails
+        
         overlap = 0.1  # seconds, increase for more seamless playback
         for i in np.arange(0, total_runtime, sound_duration - overlap):
             self.add_sound(sound_file, time_offset=i)
